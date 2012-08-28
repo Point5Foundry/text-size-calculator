@@ -1,0 +1,6 @@
+{
+    "name": "pff/text-size-calculator",
+    "autoload": {
+        "psr-0": {"Pff": "src/"}
+    }
+}
