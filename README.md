@@ -17,6 +17,6 @@ Caveats
 
 The sizes passed and used are ... hit and miss. Font size will be point w/ GD2.
 
-$page_width and $page_height are likely pixels.
+$page_width and $page_height are in pixels.
 
 It's nowhere near perfect, but I hope this saves someone else some pain.
