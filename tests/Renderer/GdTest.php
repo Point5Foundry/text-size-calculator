@@ -40,11 +40,7 @@ He is a nice dog, but sometimes he can be grumpy, so watch your fingers, because
 
         $pages = $gd->getPages($font, $font_size, $text, 200, 100);
 
-        $expected_pages = array(
-            "My very nice dog wants to say\nhello.\n\nHe is a nice dog, but sometimes\nhe can be grumpy, so watch\nyour fingers, because he bites."
-        );
-
-        $this->assertEquals($expected_pages, $pages);
+        $this->assertContentIsInPages($text, $pages);
     }
 
     public function testMoreWordChunking()
@@ -66,7 +62,28 @@ He is a nice dog, but sometimes he can be grumpy, so watch your fingers, because
             "sometimes he can be\ngrumpy, so watch your\nfingers, because he\nbites.",
         );
 
-        $this->assertEquals($expected_pages, $pages);
+        $this->assertContentIsInPages($text, $pages);
+    }
 
+    private function assertContentIsInPages($content, $pages)
+    {
+        foreach($pages as $page)
+        {
+            $lines = explode("\n", $page);
+            foreach($lines as $line)
+            {
+                if (trim($line) == '')
+                    continue;
+                if (strpos($content, $line) !== 0)
+                {
+                    $message = 'Provided content:'."\n\n".var_export($content, true)."\n\n does not match the paginated representation:\n\n".var_export($pages, true);
+                    $message .= "\n\nSpecifically we expected to find:\n".trim($line)."\n\nBut found: ".var_export($content, true);
+                    throw new PHPUnit_Framework_ExpectationFailedException(
+                        trim($message)
+                    );
+                }
+                $content = trim(substr($content, strlen($line)));
+            }
+        }
     }
 }
