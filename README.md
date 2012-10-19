@@ -1,6 +1,8 @@
 Text Size Calculator
 ====================
 
+[![Build Status](https://secure.travis-ci.org/Point5Foundry/text-size-calculator)](http://travis-ci.org/Point5Foundry/text-size-calculator)
+
 I needed a simple tool to help me determine how many pages particular content would spread across.
 
 Building a PDF, we had a set content area where the text had to fit, but the number of pages didn't matter.
