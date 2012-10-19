@@ -13,7 +13,7 @@ class GdTest extends PHPUnit_Framework_TestCase
 
         $height = $gd->getEstimatedHeight($font, $font_size, 'MHello', 1000);
 
-        $this->assertEquals(12, $height);
+        $this->assertLessThanOrEqual(12, $height);
 
         $font_size = 16;
 
@@ -36,7 +36,7 @@ He is a nice dog, but sometimes he can be grumpy, so watch your fingers, because
 
         $height = $gd->getEstimatedHeight($font, $font_size, $text, 400);
 
-        $this->assertEquals(48, $height);
+        $this->assertLessThanOrEqual(48, $height);
 
         $pages = $gd->getPages($font, $font_size, $text, 200, 100);
 
