@@ -33,7 +33,7 @@ abstract class Renderer
     {
         $height = $this->getTextHeight($font_file, $font_size, 'M');
 
-        $lines = $this->getBrokenUpTextArray($font_file, $font_size, $text, $width);
+        $lines = $this->getLines($font_file, $font_size, $text, $width);
         return $height * count($lines);
     }
 
@@ -103,13 +103,13 @@ abstract class Renderer
         {
             $chunk = array_splice($lines, 0, $lines_per_page);
 
-            if ($chunk[0] == '')
+            if (trim($chunk[0]) == '')
                 unset($chunk[0]);
 
             if (isset($line_count[0]))
                 $chunk[] = $lines[0];
 
-            $junk = array_splice($lines, 0, 1);
+            //$junk = array_splice($lines, 0, 1);
 
             $pages[] = trim(implode("\n", $chunk));
         }

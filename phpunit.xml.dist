@@ -1,8 +1,3 @@
-<!--
-  ~ Copyright (c) 2012. Point Five Foundry
-  ~ @author Jacob Mather <jacob@pointfivefoundry.com>
-  -->
-
 <phpunit
   colors="false"
   convertErrorsToExceptions="true"

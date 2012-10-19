@@ -11,7 +11,7 @@ class GdTest extends PHPUnit_Framework_TestCase
 
         $font_size = 12;
 
-        $height = $gd->getEstimatedHeight($font, $font_size, 'Hello', 1000);
+        $height = $gd->getEstimatedHeight($font, $font_size, 'MHello', 1000);
 
         $this->assertEquals(12, $height);
 
@@ -45,13 +45,25 @@ He is a nice dog, but sometimes he can be grumpy, so watch your fingers, because
         );
 
         $this->assertEquals($expected_pages, $pages);
+    }
 
+    public function testMoreWordChunking()
+    {
+        $gd = new \Pff\TextSizeCalculator\Renderer\Gd();
+
+        $font = __DIR__.'/../../test-fodder/ArialNarrow.ttf';
+
+        $font_size = 12;
+
+        $text = 'My very nice dog wants to say hello.
+
+He is a nice dog, but sometimes he can be grumpy, so watch your fingers, because he bites.';
 
         $pages = $gd->getPages($font, $font_size, $text, 150, 50);
 
         $expected_pages = array(
-            "My very nice dog wants\nto say hello.\n\nHe is a nice dog, but\nsometimes he can be",
-            "grumpy, so watch your\nfingers, because he\nbites.",
+            "My very nice dog wants\nto say hello.\n\nHe is a nice dog, but",
+            "sometimes he can be\ngrumpy, so watch your\nfingers, because he\nbites.",
         );
 
         $this->assertEquals($expected_pages, $pages);
